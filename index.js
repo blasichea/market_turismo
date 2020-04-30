@@ -2,17 +2,19 @@ const express = require('express');
 const bParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const secret = 'asd0192AB98lipoX';
-const pathStatic = "C:/Users/20314058810/Desktop/CODE/jwt/static/";
+const pathStatic = "ROOT_PATH/jwt/static/";
 
 var app = express();
 
 var usuarios = {
 	pepe: {
+		usuario: "pepe",
 		password: "cuca",
 		admin: false,
 		nivel: 1
 	},
 	juan: {
+		usuario: "juan",
 		password: "popo",
 		admin: true,
 		nivel: 3
@@ -25,8 +27,9 @@ app.get('/login', (req, res) => {
 	var user = usuarios[req.query.usuario];
 
 	if (user.password === req.query.password) {
-		var token = jwt.sign({user: user}, secret);
+		var token = jwt.sign({user: user.usuario}, secret);
 		console.log(token);
+		res.sendFile(pathStatic + "index.html");
 	}
 });
 
@@ -34,7 +37,7 @@ app.get('/login', (req, res) => {
 function chkLogin(req, res, next){
 	if (req.query.token) {
 		var decode = jwt.verify(req.query.token, secret);
-		console.log(decode);
+		console.log("Inicio: " + decode.user);
 		next();
 	} else {
 		res.sendFile(pathStatic + "login.html");
