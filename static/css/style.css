@@ -9,3 +9,124 @@
     margin-right: 2.5%;
     margin-left: 2.5%;
 }
+
+
+
+/* Estilos para el LOGIN */
+
+html{
+    font-family: 'Roboto', sans-serif;
+  }
+
+body{
+    background: url(https://wttc.org/DesktopModules/MVC/Carousel/images/693/1_20200420110734_WTTC%20TogetherInTravel%20Image.jpg);
+    background-size: cover;
+}
+
+.logo{
+    width: 170px;
+    margin-bottom: 20px;
+}
+  
+.title-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form1{
+    border: 1px solid #f1f2f4;
+    margin: 64px auto 0px;
+    display: flex;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    max-width: 536px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(5, 0, 56, 0.1);
+    align-items: center;
+    border-radius: 8px;
+    flex-direction: column;
+}
+
+.inputs-container{
+    margin-top: 24px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 360px;
+  }
+
+.title1{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #270570;
+  }
+
+label{
+    font-family: 'Roboto', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color:rgb(99, 99, 99);
+    position: absolute;
+    line-height: 1;
+    letter-spacing: 0.00938em;
+    padding-top: 10px;
+    display: grid;
+}
+
+.input-line{
+    padding-top: 25px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.input-text:hover{
+    background-color: #EBE5F5;
+}
+
+
+.input-text{
+    border-radius: 6px;
+    height: 48px;
+    padding: 0 20px;
+    font-size: 14px;
+    box-sizing: border-box;
+    box-shadow: none;
+    border-width: 1px;
+    border-style: solid;
+    display: block;
+    width: 100%;
+}
+
+.input-text:hover{
+    color:#4300d2;
+}
+
+.btn-ingresar{
+    height: 48px;
+    width: 180px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 48px;
+    color: #ffffff;
+    background-color: #4300d2;
+    box-sizing: border-box; 
+    border-radius: 24px; 
+    user-select: none;
+    display: inline-block; 
+    outline: 0px; 
+    border: none; 
+    text-align: center; 
+    text-decoration: none; 
+    white-space: nowrap; 
+    cursor: pointer; 
+    overflow: hidden; 
+}
+
+.btn-ingresar:hover { 
+    transition-duration: 0s; 
+    text-decoration: none;
+    background-color: #EBE5F5;
+    color: #4300D2;
+    box-shadow: 0px 0px 10px rgba(5, 0, 56, 0.1);
+}
