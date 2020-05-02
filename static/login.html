@@ -1,24 +1,51 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles/styles.css">
-	<title>Login Market Turismo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/syles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-	<header>
-		<h1>Bienvenido...</h1>
-	</header>
-	<main>
-		<div>
-			<h2>Iniciar Sesion:</h2>
-			<label for="usuario">Usuario...</label>
-			<input type="text" name="usuario" id="user"><br>
-			<label for="password">Password</label>
-			<input type="password" name="password" id="password"><br>
-		</div>
-		<button>Iniciar</button>
-	</main>
+    <form class="form1">
+        <div>
+            <img class="logo" src="./assets/Despegar.com_logo.svg"alt="logo">
+        </div>
+        <div class="title-container">
+            <div class="title1">
+                Ingresa tus datos de acceso
+            </div>
+        </div>
+
+        <div class="inputs-container">
+            <div class="form-input">
+                <label>
+                    Usuario
+                </label>
+                <div class="input-line">
+                    <input type="email" class="input-text" value="ejemplo@gmail.com">
+                </div>
+            </div>
+
+            <div class="form-input">
+                <label>
+                Contraseña
+                </label>
+                <div class="input-line">
+                    <input type="password" class="input-text" value="7ea0gnfdjgi">
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <button class="btn-ingresar" type="button">
+                <span>
+                Ingresar
+                </span>
+            </button>
+        </div>
+    </form>
 </body>
 </html>
