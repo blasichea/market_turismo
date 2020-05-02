@@ -20,5 +20,10 @@ Enviar:
 
 ### Archivos HTML, CSS y JS  
 - Los archivos *HTML* deben estar dentro de una carpeta **"static"**  
-- los archivos *CSS* van dentro de **"static/styles"**  
-- Los archivos *JS* van dentro de **"static/scripts"**
+- Los archivos *CSS* van dentro de **"static/styles"**  
+	Utilizar el mismo nombre que el archivo HTML.  
+	ej: *index.css*  
+
+- Los archivos *JS* van dentro de **"static/scripts"**  
+	Utilizar el mismo nombre que el archivo HTML.  
+	ej: *index.js*
