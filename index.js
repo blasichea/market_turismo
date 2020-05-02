@@ -6,6 +6,9 @@ const pathStatic = "/home/andres/Escritorio/FULL STACK/actividades/Market/market
 
 var app = express();
 
+app.use(express.static('static'));
+
+
 var usuarios = {
 	pepe: {
 		usuario: "pepe",
@@ -69,8 +72,8 @@ function chkAdmin(req, res, next){
 }
 
 
-
 app.use(chkLogin);
+
 
 /* RUTAS */
 
