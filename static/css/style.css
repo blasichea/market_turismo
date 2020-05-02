@@ -1,0 +1,11 @@
+.nav-hover:hover {
+    text-decoration: none;
+    background-color: darkblue;
+    border-radius: 20px;
+    color: white !important;
+}
+
+.nav-container {
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+}
