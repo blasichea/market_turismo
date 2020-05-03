@@ -11,6 +11,7 @@ Se creó una seudo-tabla de **"usuarios"** y una de **"paquetes"**
 
 -  ***paquetes***  
 	*destino*,  
+	*img*,  
 	*descripcion*,  
 	*precio*  
 
