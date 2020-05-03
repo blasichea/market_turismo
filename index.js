@@ -93,31 +93,7 @@ var paquetes = {
 }
 
 
-/* RUTAS SIN MIDDLEWARE */
 
-
-app.get('/login', (req, res) => {
-	res.sendFile(path.join(__dirname, "static/login.html"));
-});
-
-
-app.post('/login', (req, res) => {
-	var { user, password } = req.body;
-
-	if (!user || !password) {
-		res.status(400);
-		res.send("Usuario o contraseña incorrectos");
-	} else {
-		if (usuarios[user].password === password) {
-			var token = jwt.sign({user: user.usuario}, secret);
-			console.log(token);
-			res.json({usuario: user, token: token});
-		} else {
-			res.status(400);
-			res.send("Usuario o contraseña incorrectos");
-		}
-	}
-});
 
 
 /* MIDDLEWARES */
@@ -167,6 +143,34 @@ function chkAdmin(req, res, next){
 
 /* RUTAS */
 
+/* RUTAS SIN MIDDLEWARE */
+
+app.get('/login', (req, res) => {
+	res.sendFile(path.join(__dirname, "static/login.html"));
+});
+
+
+app.post('/login', (req, res) => {
+	var { user, password } = req.body;
+
+	if (!user || !password) {
+		res.status(400);
+		res.send("Usuario o contraseña incorrectos");
+	} else {
+		if (usuarios[user].password === password) {
+			var token = jwt.sign({user: user.usuario}, secret);
+			console.log(token);
+			res.json({usuario: user, token: token});
+		} else {
+			res.status(400);
+			res.send("Usuario o contraseña incorrectos");
+		}
+	}
+});
+
+
+/* RUTAS CON MIDDLEWARE */
+
 app.get('/', (req, res) => {
 
 	res.sendFile(path.join(__dirname, "static/index.html"));
@@ -201,6 +205,25 @@ app.get('/compras/:user', chkLogin, chkUser, (req, res) => {
 app.get('/compras', chkAdmin, (req, res) => {
 
 	res.json(totalCompras());
+});
+
+
+app.get('/paquetes', chkLogin, (req, res) => {
+
+	res.json(paquetes)
+});
+
+
+app.get('/paquetes/:destino', (req, res) => {
+	var destino = req.params.destino;
+	var result = [];
+
+	for (const paq in paquetes) {
+		if (destino === paquetes[paq].destino) {
+			result.push(paquetes[paq]);
+		}
+	}
+	res.json(result);
 });
 
 
