@@ -3,21 +3,35 @@
 ## Especificaciones
 Se creó una seudo-tabla de **"usuarios"** y una de **"paquetes"**  
 -  ***usuarios***  
-	*usuario*,  
-	*password*,  
-	*admin*,  
-	*nivel*,  
-	*compras*  
+	*usuario:* **string**,  
+	*password:* **string**,  
+	*admin:* **boolean**,  
+	*nivel:* **int**,  
+	*compras:* **array**  
 
 -  ***paquetes***  
-	*destino*,  
-	*img*,  
-	*descripcion*,  
-	*precio*  
+	*destino:* **string**,  
+	*img:* **string**,  
+	*descripcion:* **string**,  
+	*precio:* **int**  
 
 * * *
 
 ### Funcionamiento de Rutas
+
+- ### **POST a "/paquetes" + token**  
+	Un adminisrador puede agregar paquetes enviando un JSON:
+
+		{
+			destino: "nombre de destino",
+			img: "nombre de la imagen.jpg"
+			descripcion: "Describir el destino",
+			precio: 99999
+		}
+	***ATENCION!***: si el destino ya existe se sobreescribirá.  
+	Un **"destino"** se compara con otro, solo en sus literales. Los espacios serán ignorados.  
+
+* * *
 
 - ### **GET a "/paquetes" + token**  
 	Lo puede pedir cualquier usuario logueado.  
@@ -30,6 +44,15 @@ Se creó una seudo-tabla de **"usuarios"** y una de **"paquetes"**
 	Un usuario logueado recibirá todos los paquetes con destino **":destino"**  
 		
 		array[paquete, paquete, ...]
+
+* * *
+
+- ### **PUT a "/usuarios/:user" + token**  
+	Para modificar las propiedades de un usuario.  
+	Todos los usuarios pueden cambiar su propia contraseña.  
+	Enviando:
+
+		{ password: "12345678" }
 
 * * *
 
