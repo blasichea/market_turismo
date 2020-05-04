@@ -141,6 +141,11 @@ function chkAdmin(req, res, next){
 
 /* RUTAS SIN MIDDLEWARE */
 
+app.get('/administrar', chkAdmin, (req, res) => {
+	res.sendFile(path.join(__dirname, "static/admin.html"));
+});
+
+
 app.get('/login', (req, res) => {
 	res.sendFile(path.join(__dirname, "static/login.html"));
 });
@@ -150,17 +155,19 @@ app.post('/login', (req, res) => {
 	const { usuario, password } = req.body;
 
 	if (!usuario || !password) {
-		res.status(401);
-		res.send("Usuario o contraseña incorrectos");
-	} else {
+		/* res.status(400); */
+		res.json("Usuario o contraseña incorrectos");
+	} else if (usuarios[usuario]) {
 		if (usuarios[usuario].password === password) {
 			var token = jwt.sign({user: usuario}, secret);
 			console.log(token);
 			res.json({user: usuario, token: token});
 		} else {
-			res.status(401);
-			res.send("Usuario o contraseña incorrectos");
+			/* res.status(400); */
+			res.json("Usuario o contraseña incorrectos");
 		}
+	} else {
+		res.json("Usuario o contraseña incorrectos");
 	}
 });
 

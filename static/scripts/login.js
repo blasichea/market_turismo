@@ -1,27 +1,33 @@
-var user = document.forms.usuario;
-var pass = document.forms.password;
+const url = "http://localhost:3000/login";
 
-var datos = {usuario: user, password: pass};
+/* var user = document.getElementById("us");
+var pass = document.getElementById("pass"); */
+
+
+
+
 
 function loguer() {
-	fetch("http://localhost:3000/login", {
-		headers: {
-			'Accept': 'application/json',
-			"Content-Type": "application/json",
-			"async": true,
-  			"crossDomain": true,
-		},
-		
-		method: "POST",
-        body: JSON.stringify(datos)
-    })
-        .then(response => {
-            return response.json();
-        })
-        .then(res => {
-			console.log(res.token);
-			localStorage.setItem("token", res.token);
-			fetch("http://localhost:3000?" + res.token);
+	var user = document.getElementById("us").value;
+	var pass = document.getElementById("pass").value;
+	var data = {usuario: user, password: pass};
+	console.log(data);
+	fetch(url, {
+		method: 'POST', // or 'PUT'
+		body: JSON.stringify(data), // data can be `string` or {object}!
+		headers:{
+			'Content-Type': 'application/json'
+		}
+		}).then(res => res.json())
+		.then(response => {
+			
+			const {token} = response;
+			if (token) {
+				localStorage.setItem("token", response);
+			} else {
+				console.log('Success:', response);
+			}
 		})
+		.catch(error => console.error('Error:', error));
 		
 }
