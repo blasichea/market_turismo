@@ -11,7 +11,8 @@ function loguer() {
 	var user = document.getElementById("us").value;
 	var pass = document.getElementById("pass").value;
 	var data = {usuario: user, password: pass};
-	console.log(data);
+	var tok;
+
 	fetch(url, {
 		method: 'POST', // or 'PUT'
 		body: JSON.stringify(data), // data can be `string` or {object}!
@@ -23,11 +24,13 @@ function loguer() {
 			
 			const {token} = response;
 			if (token) {
+				tok = token;
 				localStorage.setItem("token", response);
 			} else {
-				console.log('Success:', response);
+				alert(response);
 			}
 		})
 		.catch(error => console.error('Error:', error));
 		
+	location.replace("http://localhost:3000?" + tok);
 }
