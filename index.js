@@ -174,7 +174,7 @@ app.post('/login', (req, res) => {
 
 /* RUTAS CON MIDDLEWARE */
 
-app.get('/', (req, res) => {
+app.get('/', chkLogin, (req, res) => {
 
 	res.sendFile(path.join(__dirname, "static/index.html"));
 });
