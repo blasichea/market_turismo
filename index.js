@@ -1,7 +1,7 @@
 const express = require('express');
 const bParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const secret = 'asd0192AB98lipoX';
+const secreto = 'asd0192AB98lipoX';
 const path = require('path');
 
 var app = express();
@@ -17,35 +17,35 @@ app.use(bParser.json());
 var usuarios = {
 	sole: {
 		usuario: "sole",
-		password: "poncho",
+		clave: "poncho",
 		admin: false,
 		nivel: 1,
 		compras: []
 	},
 	maria: {
 		usuario: "maria",
-		password: "pururu",
+		clave: "pururu",
 		admin: false,
 		nivel: 1,
 		compras: []
 	},
 	rene: {
 		usuario: "rene",
-		password: "ranita123",
+		clave: "ranita123",
 		admin: false,
 		nivel: 1,
 		compras: []
 	},
 	pepe: {
 		usuario: "pepe",
-		password: "cuca",
+		clave: "cuca",
 		admin: false,
 		nivel: 1,
 		compras: []
 	},
 	juan: {
 		usuario: "juan",
-		password: "popo",
+		clave: "popo",
 		admin: true,
 		nivel: 3,
 		compras: [		]
@@ -98,9 +98,9 @@ var paquetes = {
 function chkLogin(req, res, next){
 	console.log("chequeo");
 	if (req.query.token) {
-		var decode = jwt.verify(req.query.token, secret);
-		console.log("Inicio: " + decode.user);
-		req.user = decode.user;
+		var decode = jwt.verify(req.query.token, secreto);
+		console.log("Inicio: " + decode.usuario);
+		req.usuario = decode.usuario;
 		next();
 	} else {
 		res.sendFile(path.join(__dirname, "static/login.html"));
@@ -108,10 +108,10 @@ function chkLogin(req, res, next){
 }
 
 
-function chkUser(req, res, next){
-	var user = req.params.user;
+function chkUsuario(req, res, next){
+	var usuario = req.params.usuario;
 
-	if (!usuarios[req.user].admin && user != req.user) {
+	if (!usuarios[req.usuario].admin && usuario != req.usuario) {
 		res.status(400);
 		res.send("Acceso denegado");
 	}
@@ -122,9 +122,9 @@ function chkUser(req, res, next){
 function chkAdmin(req, res, next){
 	var token = req.query.token;
 	if (token) {
-		var user = jwt.verify(token, secret).user;
-		if (usuarios[user].admin) {
-			req.user = user;
+		var usuario = jwt.verify(token, secreto).usuario;
+		if (usuarios[usuario].admin) {
+			req.usuario = usuario;
 			next();
 		} else {
 			res.status(400);
@@ -141,27 +141,22 @@ function chkAdmin(req, res, next){
 
 /* RUTAS SIN MIDDLEWARE */
 
-app.get('/administrar', chkAdmin, (req, res) => {
-	res.sendFile(path.join(__dirname, "static/admin.html"));
-});
-
-
 app.get('/login', (req, res) => {
 	res.sendFile(path.join(__dirname, "static/login.html"));
 });
 
 
 app.post('/login', (req, res) => {
-	const { usuario, password } = req.body;
+	const { usuario, clave } = req.body;
 
-	if (!usuario || !password) {
+	if (!usuario || !clave) {
 		/* res.status(400); */
 		res.json("Usuario o contraseña incorrectos");
 	} else if (usuarios[usuario]) {
-		if (usuarios[usuario].password === password) {
-			var token = jwt.sign({user: usuario}, secret);
+		if (usuarios[usuario].clave === clave) {
+			var token = jwt.sign({usuario: usuario}, secreto);
 			console.log(token);
-			res.json({user: usuario, token: token});
+			res.json({usuario: usuario, token: token});
 		} else {
 			/* res.status(400); */
 			res.json("Usuario o contraseña incorrectos");
@@ -180,28 +175,33 @@ app.get('/', chkLogin, (req, res) => {
 });
 
 
-app.put('/usuarios/:user', chkLogin, chkUser,(req, res) => {
+app.get('/administrar', chkAdmin, (req, res) => {
+	res.sendFile(path.join(__dirname, "static/admin.html"));
+});
 
-	if (usuarios[req.user].admin) {
+
+app.put('/usuarios/:usuario', chkLogin, chkUsuario,(req, res) => {
+
+	if (usuarios[req.usuario].admin) {
 		const {nivel, admin} = req.body;
 		if (nivel) {
-			usuarios[req.params.user].nivel = nivel;
+			usuarios[req.params.usuario].nivel = nivel;
 			console.log("cambio Nivel: " + nivel);
 		}
 		if (admin != undefined) {
-			usuarios[req.params.user].admin = admin;
+			usuarios[req.params.usuario].admin = admin;
 			console.log("cambio Admin: " + admin);
 		}
 	} 
-	if (req.user === req.params.user) {
-		const {password} = req.body;
-		if (password) {
-			usuarios[req.user].password = password;
-			console.log("cambio Password: " + password);
+	if (req.usuario === req.params.usuario) {
+		const {clave} = req.body;
+		if (clave) {
+			usuarios[req.usuario].clave = clave;
+			console.log("cambio clave: " + clave);
 		}
 	}
-	console.log("PUT user");
-	res.json(usuarios[req.params.user]);
+	console.log("PUT usuario");
+	res.json(usuarios[req.params.usuario]);
 });
 
 
@@ -211,9 +211,9 @@ app.get('/usuarios', chkAdmin, (req, res) => {
 });
 
 
-app.get('/usuarios/:user', chkLogin, chkUser, (req, res) => {
-	var user = req.params.user;
-	const {usuario, admin, nivel, compras} = usuarios[user];
+app.get('/usuarios/:usuario', chkLogin, chkUsuario, (req, res) => {
+	var usuarioParam = req.params.usuario;
+	const {usuario, admin, nivel, compras} = usuarios[usuarioParam];
 	res.json({
 		usuario: usuario,
 		admin: admin,
@@ -223,10 +223,10 @@ app.get('/usuarios/:user', chkLogin, chkUser, (req, res) => {
 });
 
 
-app.get('/compras/:user', chkLogin, chkUser, (req, res) => {
-	var user = req.params.user;
+app.get('/compras/:usuario', chkLogin, chkUsuario, (req, res) => {
+	var usuario = req.params.usuario;
 
-	res.json({usuario: user, compras: usuarios[user].compras});
+	res.json({usuario: usuario, compras: usuarios[usuario].compras});
 });
 
 

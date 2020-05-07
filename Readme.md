@@ -4,7 +4,7 @@
 Se creó una seudo-tabla de **"usuarios"** y una de **"paquetes"**  
 -  ***usuarios***  
 	*usuario:* **string**,  
-	*password:* **string**,  
+	*clave:* **string**,  
 	*admin:* **boolean**,  
 	*nivel:* **int**,  
 	*compras:* **array**  
@@ -47,16 +47,18 @@ Se creó una seudo-tabla de **"usuarios"** y una de **"paquetes"**
 
 * * *
 
-- ### **PUT a "/usuarios/:user" + token**  
+- ### **PUT a "/usuarios/:usuario" + token**  
 	Para modificar las propiedades de un usuario.  
 	Todos los usuarios pueden cambiar su propia contraseña.  
 	Enviando:
 
-		{ password: "12345678" }
+		{ clave: "12345678" }
+
+	Un administrador además puede cambiar la característica *"nivel"* y *"admin"* de cualquier usuario.
 
 * * *
 
-- ### **GET a "/usuarios/:user" + token**
+- ### **GET a "/usuarios/:usuario" + token**
 	Esta información la puede pedir el mismo usuario o un administrador.  
 	Devuelve:  
 		
@@ -78,10 +80,16 @@ Se creó una seudo-tabla de **"usuarios"** y una de **"paquetes"**
 
 * * *
 
-- ### **GET a "/compras/:user" + token**  
-	Va a devolver solo las compras del usuario **":user"**  
+- ### **GET a "/compras/:usuario" + token**  
+	Va a devolver solo las compras del usuario **":usuario"**  
 
 		{usuario:"nombre de usuario", compras: [array de compras]}
+
+* * *
+
+- ### **GET a "/login"**  
+	Con esta operación se obtiene la página de login.  
+	No hace falta enviar token.
 
 * * *
 
@@ -89,11 +97,22 @@ Se creó una seudo-tabla de **"usuarios"** y una de **"paquetes"**
 	Con esta ruta se puede loguear al usuario y recibir un tooken de seguridad.  
 	Enviar:  
 
-		{ usuario: "nombre de usuario", password: "********" }
+		{ usuario: "nombre de usuario", clave: "********" }
 
 	Para recibir:  
 
 		{ usuario: "nombre de usuario", token: "ias7d752glejhasi7sdfljg" }  
+
+* * *
+
+- ### **GET a "/" + token**  
+	Obtiene la página principal
+
+* * *
+
+- ### **GET a "/administrar" + token**  
+	A esta ruta solo puede acceder un administrador.
+	Obtendrá la página de administración de usuarios, compras y paquetes.
 
 * * *
 
@@ -106,3 +125,5 @@ Se creó una seudo-tabla de **"usuarios"** y una de **"paquetes"**
 - Los archivos *JS* van dentro de **"static/scripts"**  
 	Utilizar el mismo nombre que el archivo HTML.  
 	ej: *index.js*
+
+- Los archivos de imagenes van dentro de **"static/assets"**  
