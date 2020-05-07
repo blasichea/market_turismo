@@ -12,8 +12,8 @@ function fetchToken(){
         return response.json();
     })
     .then(function(data) {
-        console.log('yo soy data ', data.message);
-        let convertido = JSON.stringify(data.message)
+       
+        let convertido = JSON.stringify(data)
         let contenedor = document.getElementById('usCompras');
 
         contenedor.innerHTML = convertido;
