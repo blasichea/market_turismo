@@ -1,9 +1,9 @@
 const url = "http://localhost:3000/login";
 
 function loguer() {
-	var user = document.getElementById("us").value;
-	var pass = document.getElementById("pass").value;
-	var data = {usuario: user, password: pass};
+	var usuario = document.getElementById("usuario").value;
+	var clave = document.getElementById("clave").value;
+	var data = {usuario: usuario, clave: clave};
 
 	fetch(url, {
 		method: 'POST', // or 'PUT'

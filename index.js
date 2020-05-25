@@ -1,8 +1,12 @@
 const express = require('express');
 const bParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const secreto = 'asd0192AB98lipoX';
 const path = require('path');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('mysql://acamica:AcamicA%232020@localhost:3306/turismo');
+const Model = Sequelize.Model;
+
+const secreto = 'asd0192AB98lipoX';
 
 var app = express();
 
@@ -13,6 +17,77 @@ app.use(express.static(path.join(__dirname, 'static/scripts')));
 
 app.use(bParser.json());
 
+sequelize
+	.authenticate()
+	.then(() => {
+		console.log('DB Iniciada con Exito');
+	})
+	.catch(err => {
+		console.error('No se pudo conectar la DB');
+	});
+
+class Usuario extends Model {}
+Usuario.init ({
+	nombre:{
+		type: Sequelize.STRING
+	},
+	clave:{
+		type: Sequelize.STRING
+	},
+	admin:{
+		type: Sequelize.BOOLEAN
+	}
+},{
+	sequelize,
+	modelName: 'usuario'
+});
+
+
+class Paquete extends Model {}
+Paquete.init ({
+	destino:{
+		type: Sequelize.STRING
+	},
+	img:{
+		type: Sequelize.STRING
+	},
+	descripcion:{
+		type: Sequelize.TEXT
+	},
+	precio:{
+		type: Sequelize.INTEGER
+	}
+},{
+	sequelize,
+	modelName: 'paquete'
+});
+
+
+class Compra extends Model {}
+Compra.init ({
+	fecha:{
+		type: Sequelize.DATE
+	},
+	importe:{
+		type: Sequelize.INTEGER
+	},
+	medio:{
+		type: Sequelize.STRING
+	}
+},{
+	sequelize,
+	modelName: 'compra'
+});
+
+
+
+Usuario.hasMany(Compra);
+Compra.belongsTo(Usuario);
+
+Compra.belongsTo(Paquete);
+Paquete.hasMany(Compra);
+
+sequelize.sync();
 
 var usuarios = {
 	sole: {
