@@ -1,0 +1,38 @@
+{
+	Córdoba: {
+		destino: "Córdoba",
+		img: "cordoba.jpg",
+		descripcion: "Córdoba, la capital de la provincia argentina del mismo nombre, es conocida por su arquitectura colonial española. Alberga la Manzana Jesuítica, un complejo del siglo XVII con claustros activos, iglesias y el campus original de la Universidad Nacional de Córdoba, una de las universidades más antiguas de Sudamérica.",
+		precio: 10000
+	},
+	Mendoza: {
+		destino: "Mendoza",
+		img: "mendoza.jpg",
+		descripcion: "Mendoza es una ciudad de la región de Cuyo en Argentina y es el corazón de la zona vitivinícola argentina, famosa por sus Malbecs y otros vinos tintos. Sus distintas bodegas ofrecen degustaciones y visitas guiadas.",
+		precio: 11500
+	},
+	BuenosAires: {
+		destino: "Buenos Aires",
+		img: "bsas2.jpg",
+		descripcion: "¿Te gustaría conocer la Ciudad de Buenos Aires y no tienes mucho tiempo? Con este recorrido podrás disfrutar del pasado y el presente de la ciudad. Podrás conocer algunos de los símbolos de la ciudad como el Obelisco, el Teatro Colón, la Plaza de Mayo y muchos más.",
+		precio: 12000
+	},
+	Roma: {
+		destino: "Roma",
+		img: "roma.jpeg",
+		descripcion: "Roma, la capital de Italia, es una extensa ciudad cosmopolita que tiene a la vista casi 3,000 años de arte, arquitectura y cultura de influencia mundial. Las ruinas antiguas como las del Foro y el Coliseo evocan el poder del antiguo Imperio Romano.",
+		precio: 75000
+	},
+	Paris: {
+		destino: "Paris",
+		img: "paris.jpg",
+		descripcion: "París, la capital de Francia, es una importante ciudad europea y un centro mundial del arte, la moda, la gastronomía y la cultura. Su paisaje urbano del siglo XIX está entrecruzado por amplios bulevares y el río Sena.",
+		precio: 90000
+	},
+	Egipto: {
+		destino: "Egipto",
+		img: "egipto.jpg",
+		descripcion: "Egipto, país que une el noreste de África con Medio Oriente, data del período de los faraones. Tiene monumentos de milenios de antigüedad ubicados junto al fértil valle del río Nilo, incluidas las colosales pirámides de Guiza y la Gran Esfinge, al igual que las tumbas del Valle de los Reyes.",
+		precio: 120000
+	}
+}

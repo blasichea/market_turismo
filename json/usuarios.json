@@ -1,0 +1,37 @@
+{
+	sole: {
+		usuario: "sole",
+		clave: "poncho",
+		admin: false,
+		nivel: 1,
+		compras: []
+	},
+	maria: {
+		usuario: "maria",
+		clave: "pururu",
+		admin: false,
+		nivel: 1,
+		compras: []
+	},
+	rene: {
+		usuario: "rene",
+		clave: "ranita123",
+		admin: false,
+		nivel: 1,
+		compras: []
+	},
+	pepe: {
+		usuario: "pepe",
+		clave: "cuca",
+		admin: false,
+		nivel: 1,
+		compras: []
+	},
+	juan: {
+		usuario: "juan",
+		clave: "popo",
+		admin: true,
+		nivel: 3,
+		compras: [		]
+	}
+}
